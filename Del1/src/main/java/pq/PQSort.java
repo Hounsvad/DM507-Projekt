@@ -1,4 +1,4 @@
-package PriorityQue;
+package pq;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package PriorityQue;
+package pq;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +9,17 @@ public class PQHeap implements PQ{
 
     @Override
     public Element extractMin() {
+        Element root = elements.get(0);
+        Element left = elements.get(1);
+        Element right = elements.get(2);
+        if(left.getKey() < root.getKey() || right.getKey() < root.getKey() ){
+            if(left.getKey()<right.getKey()){
+                elements.set(0, left);
+            }else{
+                elements.set(0, right);
+            }
+        }
+
         Element smallestElement = elements.get(0);
         elements.remove(0);
         return smallestElement;
@@ -17,7 +28,7 @@ public class PQHeap implements PQ{
     @Override
     public void insert(Element e) {
         elements.add(e);
-        int i = elements.size();
+        int i = elements.size()-1;
         while (i > 0 && elements.get(parent(i)).getKey() > e.getKey()){
             Element parent = elements.get(parent(i));
             Element child = elements.get(i);

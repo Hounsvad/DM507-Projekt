@@ -1,4 +1,4 @@
-package PriorityQue;
+package pq;
 
 public class Element {
     private int key;

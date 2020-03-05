@@ -1,4 +1,4 @@
-package PriorityQue;
+package pq;
 
 public interface PQ {
     public Element extractMin();
