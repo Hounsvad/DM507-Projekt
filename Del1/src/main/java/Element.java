@@ -1,5 +1,3 @@
-package pq;
-
 public class Element {
     private int key;
     private Object data;

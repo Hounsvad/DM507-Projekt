@@ -1,4 +1,3 @@
-package pq;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,15 +9,26 @@ public class PQHeap implements PQ{
     @Override
     public Element extractMin() {
         Element root = elements.get(0);
-        Element left = elements.get(1);
-        Element right = elements.get(2);
-        if(left.getKey() < root.getKey() || right.getKey() < root.getKey() ){
-            if(left.getKey()<right.getKey()){
-                elements.set(0, left);
+        if(elements.size()>1){
+            Element left = elements.get(1);
+            if(elements.size()>2){
+                Element right = elements.get(2);
+                if(left.getKey() < root.getKey() || right.getKey() < root.getKey() ){
+                    if(left.getKey()<right.getKey()){
+                        elements.set(0, left);
+                    }else{
+                        elements.set(0, right);
+                    }
+                }
             }else{
-                elements.set(0, right);
+                if(left.getKey()<root.getKey()){
+                    elements.set(0, left);
+                }
             }
         }
+
+
+
 
         Element smallestElement = elements.get(0);
         elements.remove(0);

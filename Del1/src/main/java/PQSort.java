@@ -1,5 +1,3 @@
-package pq;
-
 import java.util.Scanner;
 
 public class PQSort {
