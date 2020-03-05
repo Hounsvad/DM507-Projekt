@@ -8,30 +8,10 @@ public class PQHeap implements PQ{
 
     @Override
     public Element extractMin() {
-        Element root = elements.get(0);
-        if(elements.size()>1){
-            Element left = elements.get(1);
-            if(elements.size()>2){
-                Element right = elements.get(2);
-                if(left.getKey() < root.getKey() || right.getKey() < root.getKey() ){
-                    if(left.getKey()<right.getKey()){
-                        elements.set(0, left);
-                    }else{
-                        elements.set(0, right);
-                    }
-                }
-            }else{
-                if(left.getKey()<root.getKey()){
-                    elements.set(0, left);
-                }
-            }
-        }
-
-
-
-
         Element smallestElement = elements.get(0);
-        elements.remove(0);
+        elements.set(0, elements.get(elements.size()-1));
+        elements.remove(elements.size()-1);
+        minHeapify(0);
         return smallestElement;
     }
 
@@ -39,13 +19,17 @@ public class PQHeap implements PQ{
     public void insert(Element e) {
         elements.add(e);
         int i = elements.size()-1;
-        while (i > 0 && elements.get(parent(i)).getKey() > e.getKey()){
+        while (i > 0 && elements.get(parent(i)).getKey() >= e.getKey()){
             Element parent = elements.get(parent(i));
             Element child = elements.get(i);
             elements.set(parent(i), child);
             elements.set(i, parent);
             i = parent(i);
         }
+    }
+
+    private int parent(int i){
+        return (i-1) / 2;
     }
 
     private int leftChild(int i){
@@ -56,7 +40,22 @@ public class PQHeap implements PQ{
         return 2*i+2;
     }
 
-    private int parent(int i){
-        return (i - 1) / 2;
+    private void minHeapify(int index){
+        int left = leftChild(index);
+        int right = rightChild(index);       
+        int smallest = index;
+        if (left < elements.size() && elements.get(left).getKey() < elements.get(smallest).getKey()){    
+            smallest = left;
+        }
+        if (right < elements.size() && elements.get(right).getKey() < elements.get(smallest).getKey()){
+            smallest = right;
+        }
+        if (smallest != index){
+            Element indexElement = elements.get(index);
+            Element smallestElement = elements.get(smallest);
+            elements.set(index, smallestElement);
+            elements.set(smallest, indexElement);
+            minHeapify(smallest);  			
+        }
     }
 }
