@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import javax.sound.sampled.SourceDataLine;
+
 public class PQSort {
     public static void main(String[] args) {
 
@@ -10,6 +12,7 @@ public class PQSort {
             pq.insert(new Element(sc.nextInt(), null));
             n++;
         }
+        System.out.println("Extracting");
         while (n > 0) {
             System.out.println(pq.extractMin().getKey());
             n--;
