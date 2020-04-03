@@ -2,7 +2,7 @@ import java.util.*;
 
 
 public class TestTaks1 {
-    public static void main(String args[]) {
+    public static void main(String... args) {
         //********** test case 1 **********\\
         System.out.println("//********** test case 1 **********\\\\");
         System.out.println("Insert, OrderdTraversal, Search Tests");
