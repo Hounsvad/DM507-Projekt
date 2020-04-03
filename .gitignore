@@ -3,3 +3,6 @@
 *.classpath
 *.project
 .settings/
+*.zip
+*.7<
+*.7z
