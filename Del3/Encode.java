@@ -1,3 +1,7 @@
+/**
+ * @Author Frederik Alexander Hounsvad: frhou18 - Oliver Lind Nordestgaard: olnor18
+ */
+
 import java.io.*;
 import java.util.List;
 
@@ -6,9 +10,14 @@ public class Encode {
 
     int[] characterFrequency = new int[n];
 
+    /**
+     * Encode file with Hoffman encoding with a 8 bit character set.
+     * @param inputFileName File path
+     * @param outputFileName File path
+     */
     public Encode(String inputFileName, String outputFileName){
         calculateCharacterFrequency(inputFileName);
-        HoffmanTree tree = HoffmanTree.HoffmanTreeFactory(characterFrequency);
+        HoffmanTree tree = HoffmanTree.HoffmanTreeFactory(characterFrequency); //Generates a Hoffman tree
         String[] keywords = tree.getHoffmanKeywords();
         try(BitOutputStream out = new BitOutputStream(new FileOutputStream(outputFileName)); InputStream in = new FileInputStream(inputFileName);) {
             //Writing frequencies to start of compressed file
@@ -28,6 +37,10 @@ public class Encode {
         }
     }
 
+    /**
+     * Calculates frequencies of characters.
+     * @param inputFileName
+     */
     private void calculateCharacterFrequency(String inputFileName){
         try(InputStream inputStream = new FileInputStream(inputFileName)) {
             int character = 0;
